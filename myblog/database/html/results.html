@@ -1,0 +1,14 @@
+{% if error_msg %}
+    <p>{{ error_msg }}</p>
+{% endif %}
+
+{% for post in results %}
+  <div>
+      <p>{{post.Name}}</p>
+      <p>{{post.Fiber}}</p>
+  </div>
+{% empty %}
+  <div class="no-post">
+    No results
+  </div>
+{% endfor %}
