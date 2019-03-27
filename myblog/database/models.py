@@ -8,6 +8,7 @@ class food_table(models.Model):
     Fiber = models.IntegerField()
     Protein = models.IntegerField()
     Fat = models.IntegerField()
+    SourceTpye = models.CharField(max_length=15)
 
     def __str__(self):
         return self.Name
