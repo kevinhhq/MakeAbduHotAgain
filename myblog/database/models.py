@@ -9,4 +9,7 @@ class food_table(models.Model):
     Protein = models.IntegerField()
     Fat = models.IntegerField()
 
+    def __str__(self):
+        return self.Name
+
 
