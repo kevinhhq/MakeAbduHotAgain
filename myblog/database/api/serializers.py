@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from database.models import food_table, DietPlan
+from database.models import food_table, DietPlan, GeneratedBy
 from django.contrib.auth.models import User
 from django.db.models import Count
 from rest_framework import serializers
@@ -31,9 +31,18 @@ class TokenSerializer(serializers.ModelSerializer):
         fields = ('key', 'user')
 
 class DietPlanSerializer(serializers.ModelSerializer):
+    foods_list = serializers.SerializerMethodField()
+
+    def get_foods_list(self, obj):
+        queryset = food_table.objects.values('Name').filter(id__in=GeneratedBy.objects.values('food_id').filter(plan_id=obj.id))
+        food_list = []
+        for item in queryset:
+            food_list.append(item['Name'])
+        return food_list
+
     class Meta:
         model = DietPlan
         fields = ('id', 'name', 'date', 
             'user', 'goal', 'status', 
-            'carb', 'fiber','protein', 'fat')
+            'carb', 'fiber','protein', 'fat', 'foods_list')
     

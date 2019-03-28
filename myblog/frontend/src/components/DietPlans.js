@@ -10,7 +10,7 @@ const DietPlans = (props) => {
         dataSource={props.data}
         renderItem={item => (
           <List.Item>
-            <Card title={<a href={`/${item.id}`}>{item.name}</a>}>
+            <Card title={<a href={`plans/${item.id}`}>{item.name}</a>}>
                 Plan Goal: <br/>
                 {item.goal} <br/>
                 Status: <br /> 
