@@ -11,10 +11,7 @@ const Foods = (props) => {
         renderItem={item => (
           <List.Item>
             <Card title={<a href={`/${item.id}`}>{item.Name}</a>}>
-                Carb: {item.Carbonhydrates} <br/>
-                Fiber: {item.Fiber} <br/>
-                Protein: {item.Protein} <br/>
-                Fat: {item.Fat}
+                Source Type: {item.SourceType}
             </Card>
           </List.Item>
         )}

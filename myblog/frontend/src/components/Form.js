@@ -1,17 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import {
-  Form, Input, Button, Radio,
+  Form, Input, Button,
 } from 'antd';
 
 const formItemLayout = {
-    labelCol: { span: 2 },
-    wrapperCol: { span: 8 },
+    labelCol: { span: 4 },
+    wrapperCol: { span: 5 },
 };
 
 const formTailLayout = {
-    labelCol: { span: 2 },
-    wrapperCol: { span: 8, offset: 2},
+    labelCol: { span: 4 },
+    wrapperCol: { span: 5, offset: 4},
 };
 
 class CustomForm extends React.Component {
@@ -24,7 +24,8 @@ class CustomForm extends React.Component {
             Carbonhydrates: event.target.elements.Carb.value,
             Fiber: event.target.elements.Fiber.value,
             Protein: event.target.elements.Protein.value,
-            Fat: event.target.elements.Fat.value
+            Fat: event.target.elements.Fat.value,
+            SourceType: event.target.elements.SourceType.value
         };
 
         switch ( requestType ) {
@@ -46,7 +47,7 @@ class CustomForm extends React.Component {
           <div>
             <Form onSubmit={(event) => this.handleFormSubmit(event, this.props.requestType, this.props.foodID)}>
               <Form.Item {...formItemLayout} label="Name">
-                <Input name="Name" placeholder="Food Name" />
+                <Input name="Name" placeholder="Food Name" /> <br/>
               </Form.Item>
               <Form.Item {...formItemLayout} label="Carb">
                 <Input name="Carb" placeholder="Carbonhydrate in gram" />
@@ -59,6 +60,9 @@ class CustomForm extends React.Component {
               </Form.Item>
               <Form.Item {...formItemLayout} label="Fat">
                 <Input name="Fat" placeholder="Fat in gram" />
+              </Form.Item>
+               <Form.Item {...formItemLayout} label="Source Type">
+                <Input name="SourceType" placeholder="SourceType of this food" />
               </Form.Item>
               <Form.Item {...formTailLayout} >
                 <Button type="primary" htmlType="submit">{this.props.btnText}</Button>

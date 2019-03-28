@@ -4,8 +4,8 @@ import { Card, Button, Form } from 'antd';
 import CustomForm from '../components/Form'
 
 const formTailLayout = {
-    labelCol: { span: 2 },
-    wrapperCol: { span: 8, offset: 2},
+    labelCol: { span: 4 },
+    wrapperCol: { span: 8, offset: 20},
 };
 
 class FoodDetail extends React.Component {
@@ -21,7 +21,6 @@ class FoodDetail extends React.Component {
             this.setState({
                 foods: res.data
             });
-            //console.log(res.data)
         })
     }
 
@@ -37,13 +36,17 @@ class FoodDetail extends React.Component {
         return (
             <div>
                 <Card title={item.Name} >
+                    <h2> Source Type: </h2>
+
+
+                        <p> {item.SourceType} </p>
+
                     <h2> Nutritions: </h2>
+
                         Carb: {item.Carbonhydrates} <br/>
                         Fiber: {item.Fiber} <br/>
                         Protein: {item.Protein} <br/>
                         Fat: {item.Fat}
-                    <h2> Description: </h2>
-                        <p> extra information goes here </p>
                 </Card>
                 <br />
 
