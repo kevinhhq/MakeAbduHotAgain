@@ -24,7 +24,7 @@ class DietPlan(models.Model):
         'UserProfile',
         on_delete=models.CASCADE
         )
-    GOAL_CHOICES = ['Lose weight', 'Keep', 'Gain Weight/Muscle']
+    GOAL_CHOICES = ['Lose Fat', 'Keep', 'Gain Weight/Muscle']
     goal = models.CharField(
         max_length=20, 
         choices=[(i, i) for i in GOAL_CHOICES], 
@@ -38,19 +38,22 @@ class DietPlan(models.Model):
     foods = models.ManyToManyField(
         food_table, 
         through='GeneratedBy', 
-        through_fields=('planID', 'foodID'))
+        through_fields=('plan', 'food'))
 
     def __str__(self):
         return self.name
 
 class GeneratedBy(models.Model):
-    planID = models.ForeignKey(
+    plan = models.ForeignKey(
         DietPlan, 
         on_delete=models.CASCADE)
-    foodID = models.ForeignKey(
+    food = models.ForeignKey(
         food_table, 
         on_delete=models.CASCADE)
     amount = models.IntegerField()
+
+    def __str__(self):
+        return self.plan.name+ "." + self.food.Name
 
 # TODO: extend rest-auth user model. NOT finished. 
 class UserProfile(models.Model):

@@ -10,7 +10,7 @@ class FoodList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api')
+        axios.get('http://127.0.0.1:8000/api/foods/')
         .then(res => {
             this.setState({
                 foods: res.data
@@ -27,6 +27,8 @@ class FoodList extends React.Component {
                 <h2> Create New Food </h2>
                 <CustomForm requestType='post' foodID={null} btnText='Create'/>
             </div>
+
+
         )
     }
 }

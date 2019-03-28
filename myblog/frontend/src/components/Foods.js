@@ -10,7 +10,7 @@ const Foods = (props) => {
         dataSource={props.data}
         renderItem={item => (
           <List.Item>
-            <Card title={<a href={`/${item.id}`}>{item.Name}</a>}>
+            <Card title={<a href={`foods/${item.id}`}>{item.Name}</a>}>
                 Source Type: {item.SourceType}
             </Card>
           </List.Item>

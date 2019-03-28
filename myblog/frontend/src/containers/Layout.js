@@ -22,9 +22,11 @@ class CustomLayout extends React.Component {
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="1">
-              <Link to="/"> Foods </Link>
+              <Link to="/foods"> Foods </Link>
             </Menu.Item>
-            <Menu.Item key="2">Diet Plans</Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/plans"> Diet Plans </Link>
+            </Menu.Item>
               {console.log("debug msg:", this.props)}
               {
                 this.props.isAuthenticated ?
@@ -56,8 +58,8 @@ class CustomLayout extends React.Component {
               }</span>}>
                 <Menu.Item key="1">option1</Menu.Item>
               </SubMenu>
-              <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                <Menu.Item key="5">option5</Menu.Item>
+              <SubMenu key="sub2" title={<span><Icon type="laptop" />Advanced</span>}>
+                <Menu.Item key="5">Popular Foods</Menu.Item>
               </SubMenu>
               <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
                 <Menu.Item key="9">option9</Menu.Item>

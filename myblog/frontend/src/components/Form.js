@@ -30,11 +30,11 @@ class CustomForm extends React.Component {
 
         switch ( requestType ) {
             case 'post':
-                return axios.post('http://127.0.0.1:8000/api/', data)
+                return axios.post('http://127.0.0.1:8000/api/foods/', data)
                 .then(res => console.log(res))
                 .catch(error => console.log(error));
             case 'put':
-                return axios.put(`http://127.0.0.1:8000/api/${foodID}/`, data)
+                return axios.put(`http://127.0.0.1:8000/api/foods/${foodID}/`, data)
                 .then(res => console.log(res))
                 .catch(error => console.log(error));
 
