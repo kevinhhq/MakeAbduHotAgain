@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+
 
 # Create your models here.
 class food_table(models.Model):
@@ -17,19 +19,23 @@ class food_table(models.Model):
 
 class DietPlan(models.Model):
     name = models.CharField(max_length=20) # diet plan name 
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=now, blank=True)
     user = models.ForeignKey(
-        'User',
+        'UserProfile',
         on_delete=models.CASCADE
         )
-    goal = models.CharField() # goal of plan: loss weight, gain weight
-    status = models.BooleanField(default=False) # false = unfinished
+    GOAL_CHOICES = ['Lose weight', 'Keep', 'Gain Weight/Muscle']
+    goal = models.CharField(
+        max_length=20, 
+        choices=[(i, i) for i in GOAL_CHOICES], 
+        default='Keep') 
+    status = models.BooleanField(default=False)
     carb = models.IntegerField()
     fiber = models.IntegerField()
     protein = models.IntegerField()
     fat = models.IntegerField()
     # optional??
-    foods = madels.ManyToManyField(
+    foods = models.ManyToManyField(
         food_table, 
         through='GeneratedBy', 
         through_fields=('planID', 'foodID'))
@@ -39,7 +45,7 @@ class DietPlan(models.Model):
 
 class GeneratedBy(models.Model):
     planID = models.ForeignKey(
-        DeitPlan, 
+        DietPlan, 
         on_delete=models.CASCADE)
     foodID = models.ForeignKey(
         food_table, 
@@ -48,15 +54,19 @@ class GeneratedBy(models.Model):
 
 # TODO: extend rest-auth user model. NOT finished. 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    # custom fields for user
-    gender = models.CharField(default='undefined')
-    height = models.IntegerField()
-    age = models.IntegerField()
-    cur_weight = models.IntegerField()
-    tgt_weight = models.IntegerField()
-    is_cook = models.BooleanField()
-    plan = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    GENDER_CHOICES = ['Male', 'Female', 'Others']
+    gender = models.CharField(
+        max_length=10, 
+        choices=[(i, i) for i in GENDER_CHOICES], 
+        default='Others')
+    height = models.IntegerField(blank=True)
+    age = models.IntegerField(blank=True)
+    cur_weight = models.IntegerField(blank=True)
+    tgt_weight = models.IntegerField(blank=True)
+    is_cook = models.BooleanField(blank=True)
+    ## is it a one-to-one relation???
+    plan = models.IntegerField(blank=True, null=True) 
     total_cal = models.IntegerField()
     carb = models.IntegerField()
     fib = models.IntegerField()
@@ -64,7 +74,7 @@ class UserProfile(models.Model):
     fat = models.IntegerField()
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 # TODO: Not sure how to set up this table
