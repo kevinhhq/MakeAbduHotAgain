@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from database.models import food_table, DietPlan, GeneratedBy
+from database.models import food_table, DietPlan, GeneratedBy, UserProfile
 from django.contrib.auth.models import User
 from django.db.models import Count
 from rest_framework import serializers
 from rest_auth.models import TokenModel
+from drf_writable_nested import WritableNestedModelSerializer
 
 class FoodSerializer(serializers.ModelSerializer):
     foods_summary = serializers.SerializerMethodField()
@@ -23,6 +24,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+class UserProfileSerializer(WritableNestedModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = UserProfile
+        fields = ('user', 'gender', 'my_goal', 'height', 'weight', 'activity', 'age')
 
 class TokenSerializer(serializers.ModelSerializer):
     user = UserSerializer()
