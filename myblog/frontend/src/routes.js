@@ -6,6 +6,8 @@ import FoodList from './containers/FoodListView';
 import FoodDetail from './containers/FoodDetailedView';
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
+import Recommend from "./containers/Recommend";
+
 
 const BaseRouter = () => (
     <div>
@@ -15,6 +17,8 @@ const BaseRouter = () => (
         <Route exact path='/plans/:planID' component={DietPlanDetail} />{" "}
         <Route exact path="/login/" component={Login} />{" "} 
         <Route exact path="/signup/" component={Signup} />{" "}
+        <Route exact path="/recommend/" component={Recommend} />{" "}
+
     </div>
 );
 
